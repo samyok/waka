@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Link,
   Stack,
   Tag,
   Text,
@@ -156,6 +157,16 @@ const Home = ({
             <LeaderBoardEntry entry={entry} key={entry.user.id} index={index} />
           ))}
         </VStack>
+      </Box>
+      <Box my={10}>
+        <Text fontSize={"sm"} textAlign={"center"} color={"gray.400"}>
+          made by <Link href={"https://yok.dev"}>samyok</Link> &mdash; follow me
+          on{" "}
+          <Link color={"blue.200"} href={"https://github.com/samyok"}>
+            github
+          </Link>
+          !
+        </Text>
       </Box>
     </PageLayout>
   );
