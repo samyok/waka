@@ -1,18 +1,16 @@
-import type { NextPage } from "next";
 import {
   Avatar,
   Badge,
   Box,
   Card,
   CardBody,
-  CardHeader,
-  Text,
-  Heading,
-  HStack,
-  VStack,
   CardFooter,
   Flex,
+  Heading,
+  HStack,
   Tag,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import PageLayout from "../components/Layout/PageLayout";
 
@@ -73,7 +71,13 @@ const getColor = (name: string) => {
   ];
 };
 
-const LeaderBoardEntry = ({ entry, index }: { entry: LeaderboardEntry }) => {
+const LeaderBoardEntry = ({
+  entry,
+  index,
+}: {
+  entry: LeaderboardEntry;
+  index: number;
+}) => {
   return (
     <Card width={"100%"}>
       <CardBody pb={0}>
@@ -124,12 +128,11 @@ const LeaderBoardEntry = ({ entry, index }: { entry: LeaderboardEntry }) => {
   );
 };
 
-const Home: NextPage = ({
+const Home = ({
   leaderboard,
-  boards,
 }: {
   leaderboard: LeaderboardEntry[];
-}) => {
+}): JSX.Element => {
   return (
     <PageLayout title={"UMN Coding Time Leaderboard | Made by Samyok"}>
       <Heading m={2} mt={8} textAlign={"center"}>
@@ -194,7 +197,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      boards,
       leaderboard: uniqueLeaders,
     },
     revalidate: 60 * 60, // 1 hour
