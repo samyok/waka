@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Stack,
   Tag,
   Text,
   VStack,
@@ -81,7 +82,7 @@ const LeaderBoardEntry = ({
   return (
     <Card width={"100%"}>
       <CardBody pb={0}>
-        <HStack>
+        <Stack direction={["column", "row", "row"]}>
           <Avatar
             size={"lg"}
             name={entry.user.display_name}
@@ -91,19 +92,19 @@ const LeaderBoardEntry = ({
           <VStack alignItems={"start"}>
             <Heading size={"md"}>
               {entry.user.full_name || entry.user.display_name}
+              <Badge ml={2}>#{index + 1}</Badge>
             </Heading>
             <Tag size={"md"}>
-              {entry.running_total.human_readable_daily_average}/day
+              {entry.running_total.human_readable_daily_average} / day
             </Tag>
           </VStack>
           <Box style={{ flexGrow: 1 }} />
-          <VStack alignItems={"end"}>
-            <Badge>#{index + 1}</Badge>
+          <VStack alignItems={["start", "end"]} justifyContent={"center"}>
             <Tag size={"sm"}>
-              Total: {entry.running_total.human_readable_total}
+              {entry.running_total.human_readable_total} total
             </Tag>
           </VStack>
-        </HStack>
+        </Stack>
       </CardBody>
       <CardFooter>
         <Flex wrap={"wrap"}>
