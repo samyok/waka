@@ -14,3 +14,9 @@ yarn dev
 ```
 
 and it'll be live at http://localhost:3000.
+
+Of course, this wouldn't be complete without my own WakaTime for how long I've spent on this project: 
+
+[![wakatime](https://wakatime.com/badge/user/61bf8159-2ec4-4ac1-9393-472b05f30723/project/affa5b64-bdc0-4118-86ec-47388a87375e.svg)](https://wakatime.com/badge/user/61bf8159-2ec4-4ac1-9393-472b05f30723/project/affa5b64-bdc0-4118-86ec-47388a87375e)
+
+
