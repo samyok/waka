@@ -125,23 +125,26 @@ const LeaderBoardEntry = ({
           ))}
         </Flex>
       </CardFooter>
-      {/*<pre>{JSON.stringify(entry.running_total, null, 4)}</pre>*/}
     </Card>
   );
 };
 
 const Home = ({
   leaderboard,
+  range,
+  updated,
 }: {
   leaderboard: LeaderboardEntry[];
+  range: string;
+  updated: string;
 }): JSX.Element => {
   return (
     <PageLayout title={"UMN Coding Time Leaderboard | Made by Samyok"}>
       <Heading m={2} mt={8} textAlign={"center"}>
         UMN Coding Time Leaderboard
       </Heading>
-      <Text textAlign={"center"}>Data from the last 7 days.</Text>
-      <Text textAlign={"center"} fontSize={"xs"} mb={4}>
+      <Text textAlign={"center"}>Data {range || "from the last 7 days"}.</Text>
+      <Text textAlign={"center"} fontSize={"xs"} mb={4} color={"gray.500"}>
         Have Wakatime? Ask Samyok to join the leaderboard!
       </Text>
       <Box
@@ -167,6 +170,9 @@ const Home = ({
           </Link>
           !
         </Text>
+        <Text fontSize={"xs"} textAlign={"center"} color={"gray.400"}>
+          last updated: {new Date(updated).toLocaleString()}
+        </Text>
       </Box>
     </PageLayout>
   );
@@ -176,6 +182,7 @@ export default Home;
 
 export async function getStaticProps() {
   const apiKey = process.env.WAKATIME_API || "";
+  let range = "";
   const boards = await fetch(
     `https://wakatime.com/api/v1/users/samyok/leaderboards/?api_key=${apiKey}`
   ).then((r) => r.json());
@@ -186,6 +193,7 @@ export async function getStaticProps() {
     const boardLeaders = await fetch(
       `https://wakatime.com/api/v1/users/samyok/leaderboards/${board.id}?api_key=${apiKey}`
     ).then((r) => r.json());
+    range = boardLeaders.range.text;
 
     leaders.push(boardLeaders.data);
   }
@@ -210,6 +218,8 @@ export async function getStaticProps() {
   return {
     props: {
       leaderboard: uniqueLeaders,
+      updated: new Date().toISOString(),
+      range,
     },
     revalidate: 60 * 60, // 1 hour
   };
