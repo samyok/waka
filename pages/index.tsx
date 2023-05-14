@@ -7,7 +7,6 @@ import {
   CardFooter,
   Flex,
   Heading,
-  HStack,
   Link,
   Stack,
   Tag,
@@ -183,15 +182,14 @@ export default Home;
 export async function getStaticProps() {
   const apiKey = process.env.WAKATIME_API || "";
   let range = "";
-  const boards = await fetch(
-    `https://wakatime.com/api/v1/users/samyok/leaderboards/?api_key=${apiKey}`
-  ).then((r) => r.json());
+  const boards_url = `https://wakatime.com/api/v1/users/current/leaderboards?api_key=${apiKey}`;
+  const boards = await fetch(boards_url).then((r) => r.json());
 
   const leaders = [];
 
   for (const board of boards.data) {
     const boardLeaders = await fetch(
-      `https://wakatime.com/api/v1/users/samyok/leaderboards/${board.id}?api_key=${apiKey}`
+      `https://wakatime.com/api/v1/users/current/leaderboards/${board.id}?api_key=${apiKey}`
     ).then((r) => r.json());
     range = boardLeaders.range.text;
 
